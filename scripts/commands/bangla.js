@@ -1,9 +1,9 @@
 module.exports.config = {
-	name: "bangla",
+	name: "bn",
     version: "1.0.1",
     permission: 0,
     credits: "Nayan",
-    prefix: true,
+    prefix: "noprefix",
     description: "ask any thing",
     category: "admin",
     usages: "",
