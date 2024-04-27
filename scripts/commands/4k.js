@@ -1,5 +1,5 @@
 module.exports.config = {
-    name: "4k",
+    name: "hd",
     version: "1.0.0",
     permission: 0,
     credits: "Nayan",
@@ -41,7 +41,7 @@ const res = await upscale(content, model)
         var msg = [];
 
   const pic = (
-    await axios.get(`https://images,prodia.xyz/${job}.png`,
+    await axios.get(`https://images.prodia.xyz/${job}.png`,
       { responseType: 'stream' }
     )
   ).data;
