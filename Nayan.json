@@ -7,7 +7,7 @@
   "notification": true,
   "approval": false,
   "BOTNAME": "Nazrul",
-  "PREFIX": ".",
+  "PREFIX": "/",
   "OPERATOR": [
     "100000350435589",
     ""
