@@ -4,7 +4,7 @@ module.exports.config = {
     hasPermssion: 0,
     credits: "nazrul",
     description: "Talk to sim",
-    prefix: false,
+    prefix: "noprefix",
     category: "sim",
     usages: "[ask]",
     cooldowns: 2,
