@@ -2,7 +2,7 @@ module.exports.config = {
   name: "mia", 
   version: "1.0.0", 
   permission: 0,
-  credits: "Nayan",
+  credits: "nazrul",
   description: "example",
   prefix: true,
   category: "Love", 
@@ -47,7 +47,7 @@ module.exports.run = async function({ api, event, args }) {
 	let pathImg = __dirname + '/cache/trump.png';
 	var text = args.join(" ");
 	if (!text) return api.sendMessage("Enter the content of the comment on the board", threadID, messageID);
-	let getPorn = (await axios.get(`https://i.postimg.cc/Jh86TFLn/Pics-Art-08-14-10-45-31.jpg`, { responseType: 'arraybuffer' })).data;
+	let getPorn = (await axios.get(`https://i.imgur.com/7ja9oOq.jpeg`, { responseType: 'arraybuffer' })).data;
 	fs.writeFileSync(pathImg, Buffer.from(getPorn, 'utf-8'));
 	let baseImage = await loadImage(pathImg);
 	let canvas = createCanvas(baseImage.width, baseImage.height);
