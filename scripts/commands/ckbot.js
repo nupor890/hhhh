@@ -2,10 +2,10 @@ const axios = require('axios');
 const jimp = require("jimp");
 const fs = require("fs");
 module.exports.config = {
-  name: "ckbot",
-  version: "1.0.2",
+  name: "ck",
+  version: "1.0.0",
   permission: 0,
-  credits: "BADOL-KHAN",
+  credits: "nazr",
   description: "beginner's guide",
   prefix: true,
   category: "guide",
@@ -13,7 +13,7 @@ module.exports.config = {
   cooldowns: 5,
   envConfig: {
     autoUnsend: true,
-    delayUnsend: 60
+    delayUnsend: 59
   }
 };
 
