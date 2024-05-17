@@ -8,7 +8,7 @@ const link = [
 ];
  
 module.exports.config = {
-  name: "🥵",
+  name: "🙋‍♂️",
   version: "1.0.0",
   permission: 0,
   credits: "Rahad",
