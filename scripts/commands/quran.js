@@ -1,4 +1,3 @@
-/** Đổi Credit ? Bọn t đã không mã hóa cho mà edit rồi thì tôn trọng nhau tý đi ¯\_(ツ)_/¯ **/
 module.exports.config = {
     name: "quran",
     version: "1.0.0",
@@ -10,6 +9,10 @@ module.exports.config = {
     usages: "",
     cooldowns: 5,
     dependencies: 
+	{
+    "request":"",
+    "fs-extra":"",
+    "axios":""
 	 {
 };
 module.exports.run = async function({api, event, args, utils, Users, Threads}) {
