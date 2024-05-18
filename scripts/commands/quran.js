@@ -1,15 +1,16 @@
 /** Đổi Credit ? Bọn t đã không mã hóa cho mà edit rồi thì tôn trọng nhau tý đi ¯\_(ツ)_/¯ **/
 module.exports.config = {
-  name: `quran`,
-  version: "1.0.0", 
-  permission: 0,
-  credits: "nayan",
-  description: "", 
-  prefix: true,
-  category: "user",
-  usages: "",
-  cooldowns: 5, 
-  dependencies: {
+    name: "info",
+    version: "1.0.0",
+    permission: 0,
+    credits: "nazrul",
+    prefix: true,
+    description: "",
+    category: "prefix",
+    usages: "",
+    cooldowns: 5,
+    dependencies: 
+	 {
 };
 module.exports.run = async function({api, event, args, utils, Users, Threads}) {
   const axios = require("axios")
