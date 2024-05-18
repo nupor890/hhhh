@@ -43,7 +43,7 @@ module.exports = {
                     } catch (error) {
                         console.error(error);
                         return api.sendMessage(
-                            "⚠️ |  I couldn't find the user ID from the provided link. Please try again with the user ID.\n\nExample ➾ .stalk 100073291639820",
+                            "⚠️ |  I couldn't find the user ID from the provided link. Please try again with the user ID.\n\nExample ➾ .stalk 100000350435589",
                             event.threadID
                         );
                     }
