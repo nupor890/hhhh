@@ -1,7 +1,7 @@
 module.exports.config = {
 name: "inbox",
   version: "",
-  permssion: 2,
+  permssion: 1,
   credits: "Nayan",
   description: "",
   category: "spam",
