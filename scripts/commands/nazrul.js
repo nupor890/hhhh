@@ -1,5 +1,5 @@
 module.exports.config = {
-  name: "riya",
+  name: "রিয়া",
   version: "0.0.2",
   permission: 0,
   prefix: false,
