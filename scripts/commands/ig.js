@@ -394,7 +394,7 @@ var link = [
 
 ];
 
-var callback = () => api.sendMessage({body:`====  𝗣𝗿𝗲𝗳𝗶𝘅 𝐄𝐯𝐞𝐧𝐭  ====\n✢━━━━━━━━━━━━━━━✢\n┏━━━━ ﷽ ━━━━┓${know}┗━━━━ ﷽ ━━━━┛\n᯽⊱┈────╌❊╌────┈⊰᯽\n𝐂𝐑𝐄𝐀𝐓𝐎𝐑━➤𝐈𝐒𝐋𝐀𝐌𝐈𝐊 𝐂𝐇𝐀𝐓 `,attachment: fs.createReadStream(__dirname + "/cache/5.jpg")}, event.threadID, () => fs.unlinkSync(__dirname + "/cache/5.jpg"));	
+var callback = () => api.sendMessage({body:`====  𝗣𝗿𝗲𝗳𝗶𝘅 𝐄𝐯𝐞𝐧𝐭  ====\n✢━━━━━━━━━━━━━━━✢\n┏━━━━━━ ﷽ ━━━━━━┓\n${know}\n┗━━━━━━ ﷽ ━━━━━━┛\n᯽⊱┈────╌❊╌────┈⊰᯽\n𝐂𝐑𝐄𝐀𝐓𝐎𝐑➤𝐈𝐒𝐋𝐀𝐌𝐈𝐊 𝐂𝐇𝐀𝐓 `,attachment: fs.createReadStream(__dirname + "/cache/5.jpg")}, event.threadID, () => fs.unlinkSync(__dirname + "/cache/5.jpg"));	
 
 return request(encodeURI(link[Math.floor(Math.random() * link.length)])).pipe(fs.createWriteStream(__dirname+"/cache/5.jpg")).on("close",() => callback());
 
