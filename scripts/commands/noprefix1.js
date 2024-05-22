@@ -7,7 +7,7 @@ if (!fs.existsSync(pathFile))
   fs.writeFileSync(pathFile, 'true');
   const isEnable = fs.readFileSync(pathFile, 'utf-8');
 module.exports.config = {
-name: "noprefix1",
+name: "prefix1",
 version: "1.0.0",
 permission: 0,
 credits: "nazrul",
@@ -21,7 +21,7 @@ module.exports.handleEvent = async ({ api, event }) => {
   if (isEnable == "true"){
   const dipto2 = event.body ? event.body.toLowerCase() : '';
    // const GP = "•┄┅════❁🌺❁════┅┄•\n${GP}\n•┄┅════❁🌺❁════┅┄•\n\n"; 
-===== 𝐍𝐀𝐙𝐑𝐔𝐋 𝐁𝐎𝐓 ====="
+// ===== 𝐍𝐀𝐙𝐑𝐔𝐋 𝐁𝐎𝐓 ====="
      let d1PInfo = await api.getThreadInfo(event.threadID);
   let diptoName = d1PInfo.threadName;
     var time = moment.tz("Asia/Dhaka").format("LLLL");
@@ -33,7 +33,7 @@ const imgur = ["https://i.imgur.com/JQlB0ck.mp4"]
 const ex = path.extname(link);
   const filename = __dirname + `/cache/Shaon${ex}`;
   fs.writeFileSync(filename, Buffer.from(res.data, 'binary'));
-  if (dipto2.indexOf("🥱") ===0|| dipto2.indexOf("😴") ===0 )
+  if (dipto2.indexOf("😴") ===0|| dipto2.indexOf("😴") ===0 )
   {
 api.sendMessage({body:`${text}`,attachment: fs.createReadStream(filename)},event.threadID,() => fs.unlinkSync(filename),event.messageID)
   }
