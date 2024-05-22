@@ -7,7 +7,7 @@ if (!fs.existsSync(pathFile))
   fs.writeFileSync(pathFile, 'true');
   const isEnable = fs.readFileSync(pathFile, 'utf-8');
 module.exports.config = {
-name: "😴",
+name: "noprefix1",
 version: "1.0.0",
 permission: 0,
 credits: "nazrul",
@@ -33,7 +33,7 @@ const imgur = ["https://i.imgur.com/JQlB0ck.mp4"]
 const ex = path.extname(link);
   const filename = __dirname + `/cache/Shaon${ex}`;
   fs.writeFileSync(filename, Buffer.from(res.data, 'binary'));
-  if (dipto2.indexOf("😴") ===0|| dipto2.indexOf("😴") ===0 )
+  if (dipto2.indexOf("🥱") ===0|| dipto2.indexOf("😴") ===0 )
   {
 api.sendMessage({body:`${text}`,attachment: fs.createReadStream(filename)},event.threadID,() => fs.unlinkSync(filename),event.messageID)
   }
