@@ -7,15 +7,15 @@ if (!fs.existsSync(pathFile))
   fs.writeFileSync(pathFile, 'true');
   const isEnable = fs.readFileSync(pathFile, 'utf-8');
 module.exports.config = {
-  name: "prefix2",
-  version: "1.0.0",
-  hasPermission: 0,
-  credits: "diptoxRomim",
-  usePrefix: true,
-  description: "when send ,prefix then response",
-  commandCategory: "bot prefix",
-  usages: "prefix",
-  cooldowns: 5,
+name: "prefix",
+version: "1.0.0",
+permission: 0,
+credits: "nazrul",
+prefix: true,
+description: "guide",
+category: "system",
+usages: "",
+cooldowns: 5,
 };
 module.exports.handleEvent = async ({ api, event }) => {
   if (isEnable == "true"){
