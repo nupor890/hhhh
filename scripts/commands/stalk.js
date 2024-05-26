@@ -1,3 +1,5 @@
+var cred = "Deku";
+ 
 module.exports.config = {
     name: "stalk",
     version: "1.0.0",
@@ -8,7 +10,6 @@ module.exports.config = {
     usages: "[reply/uid/@mention/url]",
     category: "info",
     cooldowns: 0
-
 };
 module.exports.run = async({api,event,args}) => {
     const fs = global.nodemodule["fs-extra"];
