@@ -1,45 +1,75 @@
-const axios = require("axios");
+const axios = require('axios');
+
+const jimp = require("jimp");
+
+const fs = require("fs");
 
 module.exports.config = {
-    name: "ans",
-    version: "1.0.0",
-    permission: 2,
-    credits: "nazrul",
-    description: "Teach to sim",
-    prefix: true, 
-    category: "sim simi fun", 
-    usages: "[ask] => [answer]",
-    cooldowns: 5,
-    dependencies: {}
+
+name: "ans",
+
+version: "1.0.0",
+
+permssion: 2,
+
+credits: "EMon-BHai",
+
+prefix: 'awto',
+
+description: "sim",
+
+category: "user",
+
+cooldowns: 2,
+
 };
 
-module.exports.run = async function({ api, event, args }) {
-    const { threadID, messageID } = event;
-    const input = args.join(" ").split("=>");
+module.exports.run = async function({ api, event, args, Users, Threads, Currencies}) {
 
-    if (input.length < 2) {
-        if (args.length === 0) {
-            return api.sendMessage("Usage: teach [ask] => [answer]", threadID);
-        } else if (args.join(" ").includes("=>")) {
-            return api.sendMessage("Please provide both a question and an answer.", threadID);
-        } else {
-            return api.sendMessage("Please use '=>' character to separate the question and answer.", threadID);
-        }
-    }
+const uid = event.senderID;
 
-    const teachQuery = input[0].trim();
-    const ansQuery = input[1].trim();
+const info = args.join(" ");
 
-    try {
-        const response = await axios.get(`https://simsimi.fun/api/v2/?mode=teach&lang=bn&message=${encodeURIComponent(teachQuery)}&answer=${encodeURIComponent(ansQuery)}`);
+var n = global.sim_api
 
-        if (response.status >= 200 && response.status < 300) {
-            api.sendMessage(`Teaching successful! Question: ${teachQuery}, Answer: ${ansQuery}`, threadID, messageID);
-        } else {
-            api.sendMessage("An error occurred while teaching.", threadID);
-        }
-    } catch (error) {
-        console.error(error);
-        api.sendMessage("An error occurred while fetching the data.", threadID);
-    }
+var id = Object.keys(event.mentions)[0] || event.senderID;
+
+var nam = await Users.getNameUser(id);
+
+var ThreadInfo = await api.getThreadInfo(event.threadID);
+
+if (!info) {
+
+return api.sendMessage(`wrong format try : teach (your ask) - (my answer):\nEx ${global.config.PREFIX}teach কেমন আছো ? - ভালো তুমি ?`, event.threadID);
+
+} else {
+
+const msg = info.split("-");
+
+const ask = msg[0].trim();
+
+const ans = msg[1].trim();
+
+const img = `http://fi1.bot-hosting.net:5980/sim?type=teach&ask=${ask}&ans=${ans}`
+
+try {
+
+const response = await axios.get(img);
+
+api.sendMessage({ 
+
+body: `ASK: ${ask}\nANS: ${ans}`
+
+}, event.threadID);
+
+} catch (error) {
+
+console.error(error);
+
+api.sendMessage("An error occurred while teach.", event.threadID);
+
+}
+
+}
+
 };
