@@ -1,22 +1,20 @@
-const axios = require("axios");
-
 module.exports.config = {
     name: "ans",
     version: "1.0.0",
-    permission: 0,
-    credits: "nazrul",
+    hasPermssion: 2,
+    credits: "EMon-BHai",
+    prefix: 'awto',
     description: "Teach to sim",
-    prefix: true, 
-    category: "sim simi fun", 
-    usages: "[ask] => [answer]",
-    cooldowns: 5,
-    dependencies: {}
+    category: "user",
+    usages: "tec [ask] => [answer]",
+    cooldowns: 2,
 };
-
+ 
 module.exports.run = async function({ api, event, args }) {
-    const { threadID, messageID } = event;
+    const axios = require("axios");
+    let { threadID, messageID } = event;
     const input = args.join(" ").split("=>");
-
+ 
     if (input.length < 2) {
         if (args.length === 0) {
             return api.sendMessage("Usage: teach [ask] => [answer]", threadID);
@@ -26,20 +24,22 @@ module.exports.run = async function({ api, event, args }) {
             return api.sendMessage("Please use '=>' character to separate the question and answer.", threadID);
         }
     }
-
+ 
     const teachQuery = input[0].trim();
     const ansQuery = input[1].trim();
-
+ 
     try {
-        const response = await axios.get(`http://fi1.bot-hosting.net:5980/?mode=teach&lang=bn&message=${encodeURIComponent(teachQuery)}&answer=${encodeURIComponent(ansQuery)}`);
-
-        if (response.status >= 200 && response.status < 300) {
-            api.sendMessage(`Teaching successful! Question: ${teachQuery}, Answer: ${ansQuery}`, threadID, messageID);
+ 
+        const response = await axios.get(`http://fi1.bot-hosting.net:5980/sim?teach=${teachQuery}&ans=${ansQuery}`);
+ 
+        if (response.data && response.data.message) {
+            api.sendMessage(response.data.message, threadID, messageID);
         } else {
-            api.sendMessage("An error occurred while teaching.", threadID);
+            api.sendMessage("An error occurred while fetching the data.", threadID);
         }
     } catch (error) {
         console.error(error);
         api.sendMessage("An error occurred while fetching the data.", threadID);
     }
 };
+ 
