@@ -36,7 +36,7 @@ module.exports.handleEvent = async function({ api, event, Threads, Users }) {
       fs.writeFileSync(imgPath, Buffer.from(dpResponse.data));
 
       const msg = {
-        body: `•┄┅════❁🌺❁════┅┄•\n ${senderName}•┄┅════❁🌺❁════┅┄•\n ${randomResponse}\n•┄┅════❁🌺❁════┅┄•`,
+        body: `•┄┅════❁🌺❁════┅┄•\n ${senderName}\n•┄┅════❁🌺❁════┅┄•\n ${randomResponse}\n•┄┅════❁🌺❁════┅┄•`,
         attachment: fs.createReadStream(imgPath),
       };
 
