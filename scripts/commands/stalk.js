@@ -1,15 +1,14 @@
-var cred = "Deku";
- 
 module.exports.config = {
     name: "stalk",
     version: "1.0.0",
-    permision: 0,
-    credits: `${cred}`,
-    description: "get info using uid/mention/reply to a message",
-    prefix: false,
-    usages: "[reply/uid/@mention/url]",
-    category: "info",
-    cooldowns: 0
+    permission: 0,
+    credits: "Islamick Chat",
+    prefix: true,
+    description: "View information of facebook user",
+    category: "Information",
+    usages: "info [reply/tag/id]",
+    cooldowns: 3
+
 };
 module.exports.run = async({api,event,args}) => {
     const fs = global.nodemodule["fs-extra"];
