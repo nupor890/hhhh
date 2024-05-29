@@ -2,16 +2,14 @@
   name: "doya",
   version: "1.2.8",
   permission: 0,
-  credits: "Islamick Chat", //Don't chinge The credit
-  prefix: true,
-  description: "Short doya",
+  credits: "Islamick Chat", 
+  prefix: "noprefix",
   category: "doya",
-  usages: "doya",
   cooldowns: 5,
   dependencies: {
     "axios": "",
     "fs-extra": "",
-    "request": ""
+    "request": "",
   } 
 }
 
