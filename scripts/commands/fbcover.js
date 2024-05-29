@@ -1,17 +1,16 @@
+const axios = require('axios');
+const jimp = require("jimp");
+const fs = require("fs");
+
 module.exports.config = {
-name: "fbcoveer",
-version: "1.0.0",
-permission: 0,
-credits: "Islamick Chat",
-prefix: true,
-description: "use but can't change credit",
-category: "fbcover",
-usages: "facebook cover photo make by Islamick Chat",
-cooldowns: 0,
-dependencies: {
-    "fs-extra": "",
-    "request": "",
-    "axios": ""
+  name: "fbcover",
+  version: "1.0.0",
+  permssion: 0,
+  credits: "nazrul",
+  description: "",
+  category: "fbcover",
+  prefix: true,
+    cooldowns: 2,
  }
 };
 module.exports.run = async function ({ api, args, event, permssion }) {
