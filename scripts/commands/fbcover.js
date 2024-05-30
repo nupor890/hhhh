@@ -2,7 +2,7 @@ module.exports.config = {
 name: "fbcover",
 version: "1.0.0",
 permission: 0,
-credits: "MR CHAND",
+credits: "NAZRUL",
 prefix: true,
 description: "Create a facebook cover photo",
 category: "game",
@@ -14,13 +14,13 @@ dependencies: {
  }
 };
 module.exports.run = async function ({ api, args, event, permssion }) {
-if ((this.config.credits) != "MR CHAND") { return api.sendMessage(`[ WARNING ] - Detecting credits modules ${this.config.name} was changed to ${this.config.credits} by ADMINBOT ${global.config.BOTNAME} 馃槓 Stop immediately!!!`, event.threadID, event.messageID)}
+if ((this.config.credits) != "NAZRUL") { return api.sendMessage(`[ WARNING ] - Detecting credits modules ${this.config.name} was changed to ${this.config.credits} by ADMINBOT ${global.config.BOTNAME} Assalamu alaikum Stop immediately!!!`, event.threadID, event.messageID)}
     const request = require('request');
   const fs = require("fs-extra")
   const axios = require("axios")
   const { threadID, messageID, senderID, body } = event;
-  if(!args[0]) return api.sendMessage('Please enter the main name!!!', threadID, messageID)
-  else return api.sendMessage(`馃攳 You chose the main name: ${args.join(" ").toUpperCase()}\n\n(Reply to this message and choose your secondary name)`,event.threadID, (err, info) => {
+  if(!args[0]) return api.sendMessage('আসসালামু আলাইকুম\nআপনার কভার বানানোর জন্য  আপনার প্রথম নামটি লিখুন\nউদাহরণ...\n /cover NAZRUL', threadID, messageID)
+  else return api.sendMessage(`Assalamu alaikum\n আপনি প্রথম ${args.join(" ").toUpperCase()} নাম চয়ন করছেন\nএবার দ্বিতীয়  নামটি চয়ন করুন এবং এই মেসেজের রিপ্লাই দিন`,event.threadID, (err, info) => {
      return global.client.handleReply.push({
         type: "tenphu",
         name: `fbcover`,
@@ -55,7 +55,7 @@ module.exports.handleReply = async function({ api, event, args, handleReply, cli
     case "tenphu": {
       var tenchinh = handleReply.tenchinh;
       api.unsendMessage(handleReply.messageID);
-      return api.sendMessage(`馃攳 You have chosen a sub-name ${event.body.toUpperCase()}\n\n(Reply to this message enter your phone number)`,threadID, function (err, info) {
+      return api.sendMessage(`Assalamu alaikum \nআপনি দ্বিতীয় নাম  ${event.body.toUpperCase()}  চয়ন করছেন\n\nএখন আপনার ফোন নাম্বার চয়ন করুন `,threadID, function (err, info) {
         return global.client.handleReply.push({
           type: "sdt",
           name: `fbcover`,
@@ -68,7 +68,7 @@ module.exports.handleReply = async function({ api, event, args, handleReply, cli
     }
     case "sdt": {
       api.unsendMessage(handleReply.messageID);
-      return api.sendMessage(`馃攳 You have selected SDT as : ${event.body.toUpperCase()}\n\(Reply to this message to enter your email)`,threadID, function (err, info) {
+      return api.sendMessage(`Assalamu alaikum\nআপনি আপনার ফোন নাম্বার  ${event.body.toUpperCase()} \n চয়ন করছেন\n\nএবার আপনার জি মেইল চয়ন করুন`,threadID, function (err, info) {
         return global.client.handleReply.push({
           type: "email",
           name: `fbcover`,
@@ -82,7 +82,7 @@ module.exports.handleReply = async function({ api, event, args, handleReply, cli
     }
     case "email": {
       api.unsendMessage(handleReply.messageID);
-      return api.sendMessage(`馃攳 You have selected email as : ${event.body.toUpperCase()}\n\(Reply to this message to enter your address)`,threadID, function (err, info) {
+      return api.sendMessage(`Assalamu alaikum\nআপনি  ${event.body.toUpperCase()}\n জিমেইল চয়ন করছেন\n\nএবার আপনার ঠিকানা লিখুন এবং এই মেসেজের রিপ্লাই দিন`,threadID, function (err, info) {
         return global.client.handleReply.push({
           type: "color",
           name: `fbcover`,
@@ -97,7 +97,7 @@ module.exports.handleReply = async function({ api, event, args, handleReply, cli
     }
     case "color": {
       api.unsendMessage(handleReply.messageID);
-      return api.sendMessage(`馃攳 You have chosen the address as : ${event.body.toUpperCase()}\nReply to this message to enter your background color (enter no as the default color)`,threadID, function (err, info) {
+      return api.sendMessage(`Assalamu alaikum\nআপনি ${event.body.toUpperCase()} ঠিকানা চয়ন করছেন\n\nআপনার কভারের ব্যাকগ্রাউন্ডের রঙ বাছাই করতে এই মেসেজ এর রিপ্লাই দিন\n(enter no as the default color)`,threadID, function (err, info) {
         return global.client.handleReply.push({
           type: "create",
           name: `fbcover`,
@@ -120,7 +120,7 @@ module.exports.handleReply = async function({ api, event, args, handleReply, cli
       var subname = handleReply.tenphu.toUpperCase()
       var phoneNumber = handleReply.sdt.toUpperCase()
       api.unsendMessage(handleReply.messageID);
-      api.sendMessage(`鈴� Initializing the image maker...`,threadID, (err, info) => {
+      api.sendMessage(`Assalamu alaikum\nআপনার কভার  বানানো সম্পুর্ন হয়েছে photo পেতে ৩০সেকেন্ট অপেক্ষা করুন `,threadID, (err, info) => {
       setTimeout(() => {
               api.unsendMessage(info.messageID);
      }, 1000);
