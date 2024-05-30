@@ -1,18 +1,23 @@
+/**
+* @author nazrul
+* @warn Do not edit code or edit credits
+*/
+
 module.exports.config = {
-  name: "lv3",
-  version: "7.3.1",
-  permssion: 0,
-  credits: "islamick chat", 
-  prefix: true,
-  description: "Get Pair From Mention",
-  category: "png",
-  usages: "[@mention]",
-  cooldowns: 5, 
-  dependencies: {
-      "axios": "",
-      "fs-extra": "",
-      "path": "",
-      "jimp": ""
+    name: "lv3",
+    version: "2.0.0",
+    permssion: 2,
+    credits: "nazrul",
+    description: "",
+    prefix: true,
+    category: "Love",
+    usages: "[tag]",
+    cooldowns: 5,
+    dependencies: {
+        "axios": "",
+        "fs-extra": "",
+        "path": "",
+        "jimp": ""
   }
 };
 
