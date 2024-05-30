@@ -1,16 +1,21 @@
 module.exports.config = {
-  name: "fbcover",
-  version: "1.0.0",
-  permssion: 0,
-  credits: "nazrul",
-  description: "",
-  category: "fbcover",
-  prefix: true,
-    cooldowns: 2,
+name: "fbcover",
+version: "1.0.0",
+permission: 0,
+credits: "Islamick Chat",
+prefix: true,
+description: "use but can't change credit",
+category: "fbcover",
+usages: "facebook cover photo make by Islamick Chat",
+cooldowns: 0,
+dependencies: {
+    "fs-extra": "",
+    "request": "",
+    "axios": ""
  }
 };
 module.exports.run = async function ({ api, args, event, permssion }) {
-if ((this.config.credits) != "Islamick Chat") { return api.sendMessage(`[ WARNING ] - Islamick Chat Don't credits modules ${this.config.name} was changed to ${this.config.credits} bởi ADMINBOT ${global.config.BOTNAME} 😐 Stop now!!!`, event.threadID, event.messageID)}
+if ((this.config.credits) != "Islamick Chat") { return api.sendMessage(`[ WARNING ] - Islamick Chat Don't credits modules ${this.config.name} was changed to ${this.config.credits} bởi ADMINBOT ${global.config.BOTNAME} Stop now!!!`, event.threadID, event.messageID)}
     const request = require('request');
   const fs = require("fs-extra")
   const axios = require("axios")
