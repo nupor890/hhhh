@@ -1,9 +1,9 @@
 module.exports.config = {
-	name: "fbcoverv2",
+	name: "fbcoverv3",
 	version: "1.0.0",
 	permission: 0,
-	credits: "Joshua Sy",
-  prefix: true,
+	credits: "nazrul",
+        prefix: true,
 	description: "better version of fbcoverv2 old",
 	category: "Image",
 	usages: "Just follow the step",
