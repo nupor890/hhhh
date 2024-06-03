@@ -1,9 +1,9 @@
 const axios = require("axios");
 
 module.exports.config = {
-    name: "a",
+    name: "an",
     version: "1.0.0",
-    permission: 2,
+    permission: 0,
     credits: "nazrul",
     description: "Teach to sim",
     prefix: true, 
