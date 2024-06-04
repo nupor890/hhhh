@@ -1,16 +1,17 @@
 const axios = require('axios');
-const jimp = require("jimp");
-const fs = require("fs");
-
+const fs = require('fs-extra');
+const jimp = require('jimp');
 module.exports.config = {
-  name: "fbcoverv2",
-  version: "1.0.0",
-  permssion: 0,
-  credits: "Mohammad Nayan",
-  description: "",
-  category: "fbcoverv2",
-  prefix: true,
-    cooldowns: 2,
+module.exports.config = {
+	name: "fbcoverv",
+	version: "1.0.0",
+	permission: 0,
+	credits: "nazrul",
+ prefix: true,
+	description: "better version of fbcoverv2 old",
+	category: "Image",
+	usages: "Just follow the step",
+	cooldowns: 5
 };
 module.exports.onStart = async function({ api, event, args, usersData}) { 
 const dipto = args.join(" "); 
@@ -23,7 +24,7 @@ const dipto = args.join(" ");
   const data = await usersData.get(id);
   const nam = data.name;
 if (!dipto) { 
-  return api.sendMessage(`❌| wrong \ntry ${global.main.config.prefix}fbcover v1/v2/v3 - name - title - address - email - phone - color (default = white)(total 7)`, event.threadID,event.messageID); 
+  return api.sendMessage(`❌| wrong \ntry ${global.GoatBot.config.prefix}fbcover v1/v2/v3 - name - title - address - email - phone - color (default = white)(total 7)`, event.threadID,event.messageID); 
 } 
 else { 
   const msg = dipto.split("-"); 
@@ -38,7 +39,7 @@ api.sendMessage(`Processing your Fbcover,Wait baby < 😘`, event.threadID,
   (err, info) => 
   setTimeout(() => { api.unsendMessage(info.messageID) 
         }, 4000));
-  const img = `${global.main.config.api}/cover/${v}?name=${encodeURIComponent(name)}&subname=${encodeURIComponent(subname)}&number=${encodeURIComponent(phone)}&address=${encodeURIComponent(address)}&email=${encodeURIComponent(email)}&colour=${encodeURIComponent(color)}&uid=${id}`; 
+  const img = `${global.GoatBot.config.api}/cover/${v}?name=${encodeURIComponent(name)}&subname=${encodeURIComponent(subname)}&number=${encodeURIComponent(phone)}&address=${encodeURIComponent(address)}&email=${encodeURIComponent(email)}&colour=${encodeURIComponent(color)}&uid=${id}`; 
   
   try { 
 const response = await axios.get(img, { responseType: 'arraybuffer' }); 
