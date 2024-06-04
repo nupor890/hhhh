@@ -2,8 +2,7 @@ const axios = require('axios');
 const fs = require('fs-extra');
 const jimp = require('jimp');
 module.exports.config = {
-module.exports.config = {
-	name: "fbcover",
+        name: "fbcover",
 	version: "1.0.0",
 	permission: 0,
 	credits: "nazrul",
