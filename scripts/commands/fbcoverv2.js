@@ -2,15 +2,15 @@ const axios = require('axios');
 const fs = require('fs-extra');
 const jimp = require('jimp');
 module.exports.config = {
-        name: "fbcover",
-	version: "1.0.0",
-	permission: 0,
-	credits: "nazrul",
-        prefix: true,
-	description: "better version of fbcoverv2 old",
-	category: "Image",
-	usages: "Just follow the step",
-	cooldowns: 5
+name: "fbcover",
+  version: "6.9",
+  permission: 0,
+  credits: "nazrul",
+  prefix: true,
+  description: "Facebook cover",
+  category: "Cover", 
+  description:{en: "name - title - address - email - phone - color (default = white)"},
+  coolDowns: 5
 };
 module.exports.onStart = async function({ api, event, args, usersData}) { 
 const dipto = args.join(" "); 
