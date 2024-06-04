@@ -3,11 +3,11 @@ const fs = require('fs-extra');
 const jimp = require('jimp');
 module.exports.config = {
 module.exports.config = {
-	name: "fbcoverv",
+	name: "fbcover",
 	version: "1.0.0",
 	permission: 0,
 	credits: "nazrul",
- prefix: true,
+        prefix: true,
 	description: "better version of fbcoverv2 old",
 	category: "Image",
 	usages: "Just follow the step",
