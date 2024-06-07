@@ -1,37 +1,68 @@
 const axios = require('axios');
- 
+
 module.exports.config = {
-  name: 'ai2',
-  version: '1.0.0',
+  name: 'aiv3',
+  version: '1.0.5',
   permission: 0,
-  credits: 'Clark',
-  prefix: true,
-  description: 'An Ai Chatgpt',
-  category: 'ai',
-  usages: '[query]',
-  cooldowns: 5,
+  credits: 'Yan Maglinte',
+  description: 'An AI powered with Image recognition!',
+  prefix: false,
+  category: 'chatbots',
+  usages: 'Ai [prompt] | Ai [reply_to_an_image]',
+  cooldowns: 0,
 };
- 
-module.exports.run = async function ({ api, args, event }) {
-  try {
-    const text = args.join(' ');
- 
-    if (!text) {
-      api.sendMessage('ℹ️ | 𝖯𝗅𝖾𝖺𝗌𝖾 𝗉𝗋𝗈𝗏𝗂𝖽𝖾 𝗌𝗈𝗆𝖾 𝗊𝗎𝖾𝗌𝗍𝗂𝗈𝗇𝗌', event.threadID, event.messageID);
+
+module.exports.run = async function({ api, event, args }) {
+  const prompt = args.join(' ');
+  const res = await axios.post('https://main.yanmaglinte.repl.co/api');
+  const data = res.data;
+  const API = data.apis;
+  api.setMessageReaction("⏱️", event.messageID, () => { }, true);
+
+  let credits = this.config.credits;
+
+  if (!prompt) {
+    api.sendMessage('I type ang imong pangutana bugo', event.threadID, event.messageID);
+    api.setMessageReaction("", event.messageID, () => { }, true);
+    return
+  }
+
+  if (event.type === 'message_reply' && event.messageReply.attachments) {
+    const attachment = event.messageReply.attachments[0];
+    if (attachment.type === 'photo') {
+      const image_url = attachment.url;
+
+      try {
+        const response = await axios.post(API + '/ocr', {
+          prompt: prompt,
+          image_url: image_url,
+          credits: credits
+        });
+
+        const data = response.data;
+        const output = data.result;
+        api.sendMessage(output, event.threadID, event.messageID);
+        api.setMessageReaction("", event.messageID, () => { }, true);
+      } catch (error) {
+        api.sendMessage('⚠️ Something went wrong!', event.threadID, event.messageID);
+        api.setMessageReaction("⚠️", event.messageID, () => { }, true);
+      }
       return;
     }
- 
-    const apiUrl = 'https://chatgpt.august-api.repl.co/response';
-    const response = await axios.post(apiUrl, { prompt: text });
- 
-    if (response.data && response.data.answer) {
-      const answer = response.data.answer.trim();
-      api.sendMessage(`🌟 | 𝗥𝗘𝗦𝗣𝗢𝗡𝗗:\n\n${answer}`, event.threadID, event.messageID);
-    } else {
-      api.sendMessage('❎ | 𝖠𝗇 𝖾𝗋𝗋𝗈𝗋 𝗈𝖼𝖼𝗎𝗋𝗋𝖾𝖽 𝗍𝗈 𝗍𝗁𝖾 𝖼𝗈𝗆𝗆𝖺𝗇𝖽. 𝖯𝗅𝖾𝖺𝗌𝖾 𝗍𝗋𝗒 𝖺𝗀𝖺𝗂𝗇 𝗅𝖺𝗍𝖾𝗋.', event.threadID, event.messageID);
-    }
+  }
+
+  try {
+    const response = await axios.post(API + '/gpt', {
+      prompt: prompt,
+      credits: credits
+    });
+
+    const data = response.data;
+    const output = data.result;
+    api.sendMessage(output, event.threadID, event.messageID);
+    api.setMessageReaction("", event.messageID, () => { }, true);
   } catch (error) {
-    console.error('Error in command:', error);
-    api.sendMessage('❎ | 𝖠𝗇 𝖾𝗋𝗋𝗈𝗋 𝗈𝖼𝖼𝗎𝗋𝗋𝖾𝖽 𝗍𝗈 𝗍𝗁𝖾 𝖼𝗈𝗆𝗆𝖺𝗇𝖽. 𝖯𝗅𝖾𝖺𝗌𝖾 𝗍𝗋𝗒 𝖺𝗀𝖺𝗂𝗇 𝗅𝖺𝗍𝖾𝗋.', event.threadID, event.messageID);
+    api.sendMessage('⚠️ Something went wrong!', event.threadID, event.messageID);
+    api.setMessageReaction("⚠️", event.messageID, () => { }, true);
   }
 };
