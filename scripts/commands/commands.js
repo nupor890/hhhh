@@ -1,12 +1,12 @@
 module.exports.config = {
-    name: "command",
+    name: "cmd",
     version: "1.0.0",
-    permission: 2,
-    credits: "nayan",
-    description: "manage/control all bot modules",
+    permssion: 2,
+    credits: "Mirai Team",
     prefix: true,
-    category: "operator",
-    usages: "[load/unload/loadAll/unloadAll/info] [command name]",
+    description: "Manage/Control all bot modules",
+    category: "Dành cho admin",
+    usages: "[load/unload/loadAll/unloadAll/info] [Module Name]",
     cooldowns: 5,
     dependencies: {
         "fs-extra": "",
@@ -14,17 +14,15 @@ module.exports.config = {
         "path": ""
     }
 };
-
-const loadCommand = function ({ moduleList,  threadID, messageID, getText }) {
-  const event = global.event
-    let operator = global.config.OPERATOR;
-            if (!operator.includes(event.senderID)) return api.sendMessage(`only bot operators can use this command.`, event.threadID, event.messageID);
+ 
+const loadCommand = async function ({ moduleList, threadID, messageID }) {
+ 
     const { execSync } = global.nodemodule['child_process'];
     const { writeFileSync, unlinkSync, readFileSync } = global.nodemodule['fs-extra'];
     const { join } = global.nodemodule['path'];
     const { configPath, mainPath, api } = global.client;
-    const logger = require(mainPath + '/Nayanc.js');
-
+    const logger = require(mainPath + '/utils/log');
+const picture = (await axios.get(`https://banner2.cleanpng.com/20180811/kar/kisspng-command-line-interface-computer-icons-cmd-exe-logo-amp-quot-command-and-conquer-amp-quo-5b6e6a67b09379.3208606815339628557233.jpg`, { responseType: "stream"})).data
     var errorList = [];
     delete require['resolve'][require['resolve'](configPath)];
     var configValue = require(configPath);
@@ -36,7 +34,7 @@ const loadCommand = function ({ moduleList,  threadID, messageID, getText }) {
             const command = require(dirModule);
             global.client.commands.delete(nameModule);
             if (!command.config || !command.run || !command.config.commandCategory) 
-                throw new Error('Module is malformed!');
+                throw new Error('Module is not properly formatted!');
             global.client['eventRegistered'] = global.client['eventRegistered']['filter'](info => info != command.config.name);
             if (command.config.dependencies && typeof command.config.dependencies == 'object') {
                 const listPackage = JSON.parse(readFileSync('./package.json')).dependencies,
@@ -50,7 +48,7 @@ const loadCommand = function ({ moduleList,  threadID, messageID, getText }) {
                         if (listPackage.hasOwnProperty(packageName) || listbuiltinModules.includes(packageName)) global.nodemodule[packageName] = require(packageName);
                         else global.nodemodule[packageName] = require(moduleDir);
                     } catch {
-                        logger.loader('not found package ' + packageName + ' support for module ' + command.config.name+ 'installing.', 'warn');
+                        logger.loader('Package not found ' + packageName + ' Support for commands ' + command.config.name+ 'Proceed with the installation...', 'Warn');
                         const insPack = {};
                         insPack.stdio = 'inherit';
                         insPack.env = process.env ;
@@ -69,10 +67,10 @@ const loadCommand = function ({ moduleList,  threadID, messageID, getText }) {
                             }
                             if (loadSuccess || !error) break;
                         }
-                        if (!loadSuccess || error) throw 'unable to load package ' + packageName + (' for module ') + command.config.name +', error : ' + error + ' ' + error['stack'];
+                        if (!loadSuccess || error) throw 'Unable to download package ' + packageName + (' for commands ') + command.config.name +', fault: ' + error + ' ' + error['stack'];
                     }
                 }
-                logger.loader('successfully downloaded the entire package for the module.' + command.config.name);
+                logger.loader('Successfully loaded the entire package for the command' + command.config.name);
             }
             if (command.config.envConfig && typeof command.config.envConfig == 'Object') try {
                 for (const [key, value] of Object['entries'](command.config.envConfig)) {
@@ -86,96 +84,112 @@ const loadCommand = function ({ moduleList,  threadID, messageID, getText }) {
                     if (typeof configValue[command.config.name][key] == undefined) 
                         configValue[command.config.name][key] = value || '';
                 }
-                logger.loader('loaded config' + ' ' + command.config.name);
+                logger.loader('Loaded config' + ' ' + command.config.name);
             } catch (error) {
-                throw new Error('failed to load config module, error : ' + JSON.stringify(error));
+                throw new Error('Failed to load config module, error: ' + JSON.stringify(error));
             }
             if (command['onLoad']) try {
                 const onLoads = {};
                 onLoads['configValue'] = configValue;
                 command['onLoad'](onLoads);
             } catch (error) {
-                throw new Error('unable to onLoad module, error : ' + JSON.stringify(error), 'error');
+                throw new Error('Unable to onLoad module, error: ' + JSON.stringify(error), 'error');
             }
             if (command.handleEvent) global.client.eventRegistered.push(command.config.name);
             (global.config.commandDisabled.includes(nameModule + '.js') || configValue.commandDisabled.includes(nameModule + '.js')) 
             && (configValue.commandDisabled.splice(configValue.commandDisabled.indexOf(nameModule + '.js'), 1),
             global.config.commandDisabled.splice(global.config.commandDisabled.indexOf(nameModule + '.js'), 1))
             global.client.commands.set(command.config.name, command)
-            logger.loader('loaded command ' + command.config.name + '.');
+            logger.loader('Loaded command ' + command.config.name + '!');
         } catch (error) {
-            errorList.push('' + nameModule + ' reason : ' + error + ' at ' + error['stack']);
+            errorList.push('- ' + nameModule + ' reason:' + error + ' at ' + error['stack']);
         };
     }
-    if (errorList.length != 0) api.sendMessage('modules that had problems loading : ' + errorList.join(' '), threadID, messageID);
-    api.sendMessage('loaded ' + (moduleList.length - errorList.length) + ' module.', threadID, messageID) 
+    if (errorList.length != 0) api.sendMessage('Commands that went wrong while loading: ' + errorList.join(' '), threadID, messageID);
+    api.sendMessage({body: '====[ 𝗖𝗠𝗗 𝗟𝗢𝗔𝗗 ]====\n❄️ Just loaded successfully ' + (moduleList.length - errorList.length) + ' command \n━━━━━━━━━━━━━━━━\n====[ 𝗦𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹 ]====\n🥀 𝗠𝗼𝗱𝘂𝗹𝗲𝘀 ('+moduleList.join(', ') + '.js) 🌸',attachment: (picture)}, threadID, messageID) 
     writeFileSync(configPath, JSON.stringify(configValue, null, 4), 'utf8')
     unlinkSync(configPath + '.temp');
     return;
 }
-
+ 
 const unloadModule = function ({ moduleList, threadID, messageID }) {
     const { writeFileSync, unlinkSync } = global.nodemodule["fs-extra"];
     const { configPath, mainPath, api } = global.client;
-    const logger = require(mainPath + "/Nayanc.js").loader;
-
+    const logger = require(mainPath + "/utils/log").loader;
+ 
     delete require.cache[require.resolve(configPath)];
     var configValue = require(configPath);
     writeFileSync(configPath + ".temp", JSON.stringify(configValue, null, 4), 'utf8');
-
+ 
     for (const nameModule of moduleList) {
         global.client.commands.delete(nameModule);
         global.client.eventRegistered = global.client.eventRegistered.filter(item => item !== nameModule);
         configValue["commandDisabled"].push(`${nameModule}.js`);
         global.config["commandDisabled"].push(`${nameModule}.js`);
-        logger(`unloaded command ${nameModule}.`);
+        logger(`Unloaded command ${nameModule}!`);
     }
-
+ 
     writeFileSync(configPath, JSON.stringify(configValue, null, 4), 'utf8');
     unlinkSync(configPath + ".temp");
-
-    return api.sendMessage(`unloaded ${moduleList.length} module`, threadID, messageID);
+ 
+    return api.sendMessage(`====[ 𝗖𝗠𝗗 ]====\n❄️ Successfully unloaded ${moduleList.length} command\n━━━━━━━━━━━━━━━━\n====[ 𝗦𝘂𝗰𝗰𝗲𝘀𝘀𝗳𝘂𝗹 ]====\n🥀 𝗠𝗼𝗱𝘂𝗹𝗲𝘀  ('+moduleList.join(', ') + '.js) 🌸`, threadID, messageID);
 }
-
+ 
 module.exports.run = function ({ event, args, api }) {
+ 
+    const cheerio = global.nodemodule["cheerio"];
+  const permission = ["","","100026921149093", ""];
+	if (!permission.includes(event.senderID)) return api.sendMessage("cút:))", event.threadID, event.messageID);
+ 
     const { readdirSync } = global.nodemodule["fs-extra"];
     const { threadID, messageID } = event;
-
+ 
     var moduleList = args.splice(1, args.length);
-
+ 
     switch (args[0]) {
-        case "load": {
-            if (moduleList.length == 0) return api.sendMessage("module name cannot be empty.", threadID, messageID);
+      case "c": 
+        case "count":{
+      let commands = client.commands.values();
+		  let infoCommand = "";
+			api.sendMessage(`====[ 𝗖𝗠𝗗 𝗖𝗼𝘂𝗻𝘁 ]====\n❄️ Now ${global.config.BOTNAME} have ${client.commands.size} usable command\n🥀 wish you and all members to use bots etc.`+ infoCommand, event.threadID, event.messageID);
+      break;
+		}
+        case "l": 
+        case "load":{
+            if (moduleList.length == 0) return api.sendMessage("The module name must not be blank!", threadID, messageID);
             else return loadCommand({ moduleList, threadID, messageID });
         }
-        case "unload": {
-            if (moduleList.length == 0) return api.sendMessage("module name cannot be empty.", threadID, messageID);
+        case "ul": 
+        case "unload":{
+            if (moduleList.length == 0) return api.sendMessage("Module name must not be blank!", threadID, messageID);
             else return unloadModule({ moduleList, threadID, messageID });
         }
-        case "loadAll": {
+        case "lA": 
+         case "loadAll":{
             moduleList = readdirSync(__dirname).filter((file) => file.endsWith(".js") && !file.includes('example'));
             moduleList = moduleList.map(item => item.replace(/\.js/g, ""));
             return loadCommand({ moduleList, threadID, messageID });
         }
-        case "unloadAll": {
+        case "ulA": 
+        case "unloadAll":{
             moduleList = readdirSync(__dirname).filter((file) => file.endsWith(".js") && !file.includes('example') && !file.includes("command"));
             moduleList = moduleList.map(item => item.replace(/\.js/g, ""));
             return unloadModule({ moduleList, threadID, messageID });
         }
-        case "info": {
+        case "i": {
             const command = global.client.commands.get(moduleList.join("") || "");
-
-            if (!command) return api.sendMessage("the module you entered does not exist.", threadID, messageID);
-
+ 
+            if (!command) return api.sendMessage("The module you imported does not exist!", threadID, messageID);
+ 
             const { name, version, hasPermssion, credits, cooldowns, dependencies } = command.config;
-
+ 
             return api.sendMessage(
-                "" + name.toUpperCase() + "\n" +
-                 "coded by : " + credits + "\n" +
-                 "version : " + version + "\n" +
-                 "request permission : " + ((hasPermssion == 0) ? "user" : (hasPermssion == 1) ? "admin" : "bot operator" ) + "\n" +
-                 "timeout : " + cooldowns + " seconds\n" +
-                 `required packages : ${(Object.keys(dependencies || {})).join(", ") || "none"}`,
+                "=== " + name.toUpperCase() + " ===\n" +
+                "- Coded by: " + credits + "\n" +
+                "- Version: " + version + "\n" +
+                "- Request permissions: " + ((hasPermssion == 0) ? "User" : (hasPermssion == 1) ? "Canal Administrator" : "Bot operator" ) + "\n" +
+                "- Standby time: " + cooldowns + " second(s)\n" +
+                `- Required packages: ${(Object.keys(dependencies || {})).join(", ") || "Without"}`,
                 threadID, messageID
             );
         }
@@ -183,4 +197,4 @@ module.exports.run = function ({ event, args, api }) {
             return global.utils.throwError(this.config.name, threadID, messageID);
         }
     }
-}
+        }
