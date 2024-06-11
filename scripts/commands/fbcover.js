@@ -12,7 +12,7 @@ name: "fbcover",
   usages: "name - title - address - email - phone - color (default = white)",
   cooldowns: 5
 };
-module.exports.run = async function({ api, event, args, Users}) { 
+module.exports.onStart = async function({ api, event, args, usersData}) { 
 const dipto = args.join(" "); 
   let id;
   if (event.type === 'message_reply') {
@@ -20,9 +20,10 @@ const dipto = args.join(" ");
   } else {
       id = Object.keys(event.mentions)[0] ||  event.senderID;
   }
-var nam = await Users.getNameUser(id); 
+  const data = await usersData.get(id);
+  const nam = data.name;
 if (!dipto) { 
-  return api.sendMessage(`❌| wrong \ntry ${global.config.PREFIX}fbcover v1/v2/v3 - name - title - address - email - phone - color (default = white)`, event.threadID,event.messageID); 
+  return api.sendMessage(`❌| wrong \ntry ${global.config.prefix}fbcover v1/v2/v3 - name - title - address - email - phone - color (default = white)(total 7)`, event.threadID,event.messageID); 
 } 
 else { 
   const msg = dipto.split("-"); 
@@ -33,11 +34,11 @@ else {
   const email = msg[4].trim() || " "; 
   const phone = msg[5].trim() || " "; 
   const color = msg[6].trim() || "white" ;
-api.sendMessage(`Processing your cover,Wait koro baby < 😘`, event.threadID,
+api.sendMessage(`Processing your Fbcover,Wait baby < 😘`, event.threadID,
   (err, info) => 
   setTimeout(() => { api.unsendMessage(info.messageID) 
         }, 4000));
-  const img = `https://noobs-api.onrender.com/dipto/cover/${v}?name=${encodeURIComponent(name)}&subname=${encodeURIComponent(subname)}&number=${encodeURIComponent(phone)}&address=${encodeURIComponent(address)}&email=${encodeURIComponent(email)}&colour=${encodeURIComponent(color)}&uid=${id}`; 
+  const img = `${global.GoatBot.config.api}/cover/${v}?name=${encodeURIComponent(name)}&subname=${encodeURIComponent(subname)}&number=${encodeURIComponent(phone)}&address=${encodeURIComponent(address)}&email=${encodeURIComponent(email)}&colour=${encodeURIComponent(color)}&uid=${id}`; 
   
   try { 
 const response = await axios.get(img, { responseType: 'arraybuffer' }); 
