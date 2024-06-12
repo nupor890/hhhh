@@ -42,7 +42,12 @@ ____________________________________
 জিঁলাঁপিঁ কে নক করতে পারেন 
 👉Fb https://www.facebook.com/ji.li.pi.6
 
-`, attachment: fs.createReadStream(__dirname + "Nayan/join/wellcome.jpg")} ,threadID));
+`, let gifUrl = 'https://i.postimg.cc/nhybf9W7/received-320490950683263.jpg.';
+let gifPath = __dirname + '/Nayan/join/join.jpeg';
+
+axios.get(gifUrl, { responseType: 'arraybuffer' })
+.then(response => {
+    fs.writeFileSync(gifPath, response.data);
   }
   else {
     try {
