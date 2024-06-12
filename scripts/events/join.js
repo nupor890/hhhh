@@ -29,9 +29,9 @@ module.exports.run = async function({ api, event }) {
   const { join } = global.nodemodule["path"];
   const { threadID } = event;
   if (event.logMessageData.addedParticipants.some(i => i.userFbId == api.getCurrentUserID())) {
-    api.changeNickname(`[${global.config.PREFIX} ] 🅙🅔🅡🅡🅨${(!global.config.BOTNAME) ? "bot" : global.config.BOTNAME}`, threadID, api.getCurrentUserID());
+    api.changeNickname(`${(!global.config.BOTNAME) ? "bot" : global.config.BOTNAME}`, threadID, api.getCurrentUserID());
     const fs = require("fs");
-    return api.sendMessage("BOT CONNECTED!!! \n\n আসসালামু আলাইকুম \n\n adding in the group chat successfully!!!\n\n আসা করি  সবাই  ভালো আছেন।💞💞 আমি আপনাদের মাঝে  নতুন\n______________________________\n\n My profix = /\n Admin =NAZARL\n______________________________যেকোনো অভিযোগ অথবা হেল্প এর জন্য আমার BOSS জিঁলাঁপিঁ কে নক করতে পারেন \nhttps://m.me/ji.la.pi.2\n✢━━━━━━━━━━━━━━━✢\n ----❖----- 𝐍𝐀𝐙𝐑𝐔𝐋 -----❖----", event.threadID, () => api.sendMessage({body:`আসসালামুআলাইকুম 💖
+    return api.sendMessage("BOT CONNECTED!!! \n\n আসসালামু আলাইকুম \n\n adding in the group chat successfully!!!\n\n আসা করি  সবাই  ভালো আছেন।💞💞 আমি আপনাদের মাঝে  নতুন\n______________________________\n\n My profix = /\n Admin =NAZARL\n______________________________যেকোনো অভিযোগ অথবা হেল্প এর জন্য আমার BOSS জিঁলাঁপিঁ কে নক করতে পারেন \nhttps://m.me/ji.la.pi.6\n✢━━━━━━━━━━━━━━━✢\n ----❖----- 𝐍𝐀𝐙𝐑𝐔𝐋 -----❖----", event.threadID, () => api.sendMessage({body:`আসসালামুআলাইকুম 💖
 ____________________________________
 BOT CONNECTED!!! 
 adding in the group chat successfully!!! আসা করি  সবাই  ভালো আছেন।💞💞 আমি আপনাদের মাঝে  নতুন💔💔❤️❤️
@@ -42,12 +42,7 @@ ____________________________________
 জিঁলাঁপিঁ কে নক করতে পারেন 
 👉Fb https://www.facebook.com/ji.li.pi.6
 
-`, let gifUrl = 'https://i.postimg.cc/nhybf9W7/received-320490950683263.jpg.';
-let gifPath = __dirname + '/Nayan/join/join.jpeg';
-
-axios.get(gifUrl, { responseType: 'arraybuffer' })
-.then(response => {
-    fs.writeFileSync(gifPath, response.data);
+`, attachment: fs.createReadStream(__dirname + "Nayan", "font")} ,threadID));
   }
   else {
     try {
@@ -68,7 +63,7 @@ axios.get(gifUrl, { responseType: 'arraybuffer' })
       }
       memLength.sort((a, b) => a - b);
 
-      (typeof threadData.customJoin == "undefined") ? msg = "🌹Assalamu alaikum 🌹\n\n {name}. আপনি এই গ্রুপের  {soThanhVien} no মেম্বার\n\n {threadName}\n\n🥀 গ্রুঁপেঁরঁ পঁক্ষঁ থেঁকেঁ আঁপঁনাঁকেঁ স্বাঁগঁতঁমঁ♥\n\n🥰🥀ᏔᎬᏞᏟϴᎷᎬ 🥀🥰 \n   ┌────♣─────┐\n   😘♦ -জিঁলাঁপিঁ-  ♦😘\n   └────♣─────┘\n \n✢━━━━━━━━━━━━━━━✢\n ----❖----- 𝐍𝐀𝐙𝐑𝐔𝐋 -----❖----" : msg = threadData.customJoin;
+      (typeof threadData.customJoin == "undefined") ? msg = "🌹Assalamu alaikum 🌹\n\n {name}. আপনি এই গ্রুপের  {soThanhVien} no মেম্বার\n\n {threadName}\n\n🥀 গ্রুঁপেঁরঁ পঁক্ষঁ থেঁকেঁ আঁপঁনাঁকেঁ স্বাঁগঁতঁমঁ♥\n\n🥰🥀ᏔᎬᏞᏟϴᎷᎬ 🥀🥰 \n        ┌────♣─────┐\n        😘♦ -জিঁলাঁপিঁ-  ♦😘\n        └────♣─────┘\n \n✢━━━━━━━━━━━━━━━✢\n ----❖----- 𝐍𝐀𝐙𝐑𝐔𝐋 -----❖----" : msg = threadData.customJoin;
       msg = msg
       .replace(/\{name}/g, nameArray.join(', '))
       .replace(/\{type}/g, (memLength.length > 1) ?  'You' : 'Friend')
