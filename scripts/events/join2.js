@@ -80,7 +80,6 @@ ADMIN :Md Raj
     console.error(error);
 });
   }
-      }
     } catch (e) { return console.log(e) };
   }
 }
