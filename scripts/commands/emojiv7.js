@@ -13,7 +13,7 @@ module.exports.config = {
 
 module.exports.handleEvent = function({ api, event, client, __GLOBAL }) {
 	var { threadID, messageID } = event;
-	if (event.body.indexOf("🐵")==0 || event.body.indexOf("🙉")==0 || event.body.indexOf("🐵")==0 || event.body.indexOf("🐒")==0 || event.body.indexOf("🙊")==0 || event.body.indexOf("🙈")==0) {
+	if (event.body.indexOf("🐵")==0 || event.body.indexOf("🙉")==0 || event.body.indexOf("🐵")==0 || event.body.indexOf("🐒")==0 || event.body.indexOf("🙊")==0 || event.body.indexOf("🙉")==0) {
 		var msg = {
 				body: "ই্ঁমো্ঁজি্ঁটা্ঁ ঠি্ঁক্ঁ তো্ঁর ম্ঁতো্ঁ 🐒\n----❖----- 𝐌𝐈𝐊𝐀𝐈𝐋 -----❖----",
 				attachment: fs.createReadStream(__dirname + `/noprefix/imojithik.mp3`)
