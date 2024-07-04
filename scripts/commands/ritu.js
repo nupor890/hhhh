@@ -4,10 +4,10 @@
 * @Dont Change This Credits Otherwisw Your Bot Lol
 */
 module.exports.config = {
-  name: "sumi",
+  name: "ritu",
   version: "1.0.0",
   permssion: 0,
-  credits: "EMon-BHai",
+  credits: "nazrul",
   prefix: 'awto',
   description: "Dont Change This Credits Otherwisw Your Bot Lol",
   usages: "sim (ask) reply simsimi",
